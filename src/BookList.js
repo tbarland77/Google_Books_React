@@ -6,36 +6,57 @@ class BookList extends Component {
     super();
     this.state = {
       bookData: props.bookData,
+      showDetails: false,
     };
+    this.toggleDetailsState = this.toggleDetailsState.bind(this);
   }
 
-  handleSubmitButton(event) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.showDetails !== this.state.showDetails) {
+      console.log("Props or state has changed " + this.state.showDetails);
+    }
+  }
+
+  toggleDetailsState(event) {
     event.preventDefault();
+    this.setState({
+      showDetails: !this.state.showDetails,
+    });
+    console.log(this.state.showDetails);
   }
 
 
   render() {
-    var Bookinfo = [];
+    var bookInfo = [];
+    var bookDetails = [];
     for (var i=0; i < this.props.bookData.length; i++) {
-      Bookinfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Title: {this.props.bookData[i].volumeInfo.title}</div>);
-      Bookinfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Author: {(this.props.bookData[i].volumeInfo.authors !== undefined) ? this.props.bookData[i].volumeInfo.authors[0] : null}</div>);
-      Bookinfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Publisher: {this.props.bookData[i].volumeInfo.publisher}</div>);
-      Bookinfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Publisher Date: {this.props.bookData[i].volumeInfo.publishedDate}</div>);
-      Bookinfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Rating: {this.props.bookData[i].volumeInfo.ratingsCount}</div>);
-      Bookinfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Print Type: {this.props.bookData[i].volumeInfo.printType}</div>);
-      Bookinfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Page Count: {this.props.bookData[i].volumeInfo.pageCount}</div>);
-      Bookinfo.push(<a key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3' href={this.props.bookData[i].volumeInfo.previewLink}>Preview Link</a>);
-      Bookinfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-12 col-md-12 col-lg-12 col-xl-12'>DESC: {this.props.bookData[i].volumeInfo.description}</div>);
+      bookInfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Title: {this.props.bookData[i].volumeInfo.title}</div>);
+      bookInfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Author: {(this.props.bookData[i].volumeInfo.authors !== undefined) ? this.props.bookData[i].volumeInfo.authors[0] : null}</div>);
+      bookInfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Publisher: {this.props.bookData[i].volumeInfo.publisher}</div>);
+      bookInfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Publisher Date: {this.props.bookData[i].volumeInfo.publishedDate}</div>);
+      if (this.state.showDetails)
+      {
+      bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Rating: {this.props.bookData[i].volumeInfo.ratingsCount}</div>);
+      bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Print Type: {this.props.bookData[i].volumeInfo.printType}</div>);
+      bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Page Count: {this.props.bookData[i].volumeInfo.pageCount}</div>);
+      bookDetails.push(<a key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3' href={this.props.bookData[i].volumeInfo.previewLink}>Preview Link</a>);
+      bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-12 col-md-12 col-lg-12 col-xl-12'>DESC: {this.props.bookData[i].volumeInfo.description}</div>);
     }
-    debugger;
+    }
+debugger;
+
 
 
     return (
       <div>
       <h2>Returned books:</h2>
+      <button onClick={this.toggleDetailsState}>Toggle show</button>
       <div className='container'>
       <div className='row'>
-      {Bookinfo}
+      {bookInfo}
+      </div>
+      <div className='row'>
+        {bookDetails}
       </div>
       </div>
       </div>
