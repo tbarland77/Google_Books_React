@@ -11,50 +11,39 @@ class SearchBooks extends Component {
     };
   }
 
-   componentDidMount() {
-     this.fetchData();
-   }
+  componentDidUpdate(prevProps, prevState) {
+    let REQUEST_URL;
+    debugger;
+    if (prevState.key !== this.state.key) {
+      REQUEST_URL = 'https://www.googleapis.com/books/v1/volumes?q=' + this.state.key;
+      axios.get(REQUEST_URL)
+      .then(response => {
+        const bookData = response.data.items;
+        this.setState ({ bookData });
+        console.log("current book data is: " + bookData);
+      });
+    }
+  }
 
-   componentDidUpdate() {
-     this.fetchData();
-   }
-
-   fetchData() {
-     let REQUEST_URL;
-     if (this.state.key !== "") {
-       REQUEST_URL = 'https://www.googleapis.com/books/v1/volumes?q=' + this.state.key;
-     } else {
-       REQUEST_URL = 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction';
-     }
-     axios.get(REQUEST_URL)
-       .then(response => {
-         const bookData = response.data.items;
-         this.setState ({ bookData });
-         console.log("current book data is: " + bookData);
-       });
-   }
-
-   handleSubmitButton(event, keyValue) {
-     debugger;
-     event.preventDefault();
-     this.setState({
-       key: this.refs.keyValue.value,
-     });
-     console.log("Current key is " + this.state.key);
-     debugger;
-   }
+  handleSubmitButton(event) {
+    event.preventDefault();
+    this.setState({
+      key: this.refs.keyValue.value,
+    });
+    console.log("Current key is " + this.state.key);
+  }
 
   render() {
     return (
       <div>
       <input type="text" id="searchText" placeholder="Search" ref="keyValue" />
       <button id="searchButton" type="button" onClick={this.handleSubmitButton.bind(this)}>
-					<i className="fa fa-search"></i> Search
-				</button>
+      <i className="fa fa-search"></i> Search
+      </button>
 
-        <br />
-        <br />
-        <BookList bookData={this.state.bookData} />
+      <br />
+      <br />
+      <BookList bookData={this.state.bookData} />
       </div>
     );
   }
