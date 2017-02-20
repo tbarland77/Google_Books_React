@@ -20,7 +20,6 @@ class SearchBooks extends Component {
       .then(response => {
         const bookData = response.data.items;
         this.setState ({ bookData });
-        console.log("current book data is: " + bookData);
       });
     }
   }
@@ -30,14 +29,13 @@ class SearchBooks extends Component {
     this.setState({
       key: this.refs.keyValue.value,
     });
-    console.log("Current key is " + this.state.key);
   }
 
   render() {
     return (
       <div>
       <input type="text" id="searchText" placeholder="Search" ref="keyValue" />
-      <button id="searchButton" type="button" onClick={this.handleSubmitButton.bind(this)}>
+      <button id="searchButton" className='btn btn-primary' type="button" onClick={this.handleSubmitButton.bind(this)}>
       <i className="fa fa-search"></i> Search
       </button>
 
