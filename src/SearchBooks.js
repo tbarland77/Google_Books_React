@@ -13,7 +13,6 @@ class SearchBooks extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     let REQUEST_URL;
-    debugger;
     if (prevState.key !== this.state.key) {
       REQUEST_URL = 'https://www.googleapis.com/books/v1/volumes?q=' + this.state.key;
       axios.get(REQUEST_URL)
@@ -39,7 +38,6 @@ class SearchBooks extends Component {
       <i className="fa fa-search"></i> Search
       </button>
 
-      <br />
       <br />
       <BookList bookData={this.state.bookData} />
       </div>

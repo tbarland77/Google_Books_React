@@ -34,7 +34,6 @@ class BookList extends Component {
       bookInfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Publisher Date: {this.props.bookData[i].volumeInfo.publishedDate}</div>);
       if (this.state.showDetails)
       {
-        debugger;
         bookDetails.push(<img key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2 img-responsive' src={(this.props.bookData[i].volumeInfo.imageLinks.smallThumbnail !== undefined) ? this.props.bookData[i].volumeInfo.imageLinks.smallThumbnail : null} alt='Book Cover' />);
         bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2'>Rating: {this.props.bookData[i].volumeInfo.ratingsCount}</div>);
         bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2'>Print Type: {this.props.bookData[i].volumeInfo.printType}</div>);
