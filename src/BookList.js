@@ -34,10 +34,12 @@ class BookList extends Component {
       bookInfo.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Publisher Date: {this.props.bookData[i].volumeInfo.publishedDate}</div>);
       if (this.state.showDetails)
       {
-        bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Rating: {this.props.bookData[i].volumeInfo.ratingsCount}</div>);
-        bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Print Type: {this.props.bookData[i].volumeInfo.printType}</div>);
-        bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3'>Page Count: {this.props.bookData[i].volumeInfo.pageCount}</div>);
-        bookDetails.push(<a key={_.uniqueId()} className='jumbotron col-sm-3 col-md-3 col-lg-3 col-xl-3' href={this.props.bookData[i].volumeInfo.previewLink}>Preview Link</a>);
+        debugger;
+        bookDetails.push(<img key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2 img-responsive' src={(this.props.bookData[i].volumeInfo.imageLinks.smallThumbnail !== undefined) ? this.props.bookData[i].volumeInfo.imageLinks.smallThumbnail : null} alt='Book Cover' />);
+        bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2'>Rating: {this.props.bookData[i].volumeInfo.ratingsCount}</div>);
+        bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2'>Print Type: {this.props.bookData[i].volumeInfo.printType}</div>);
+        bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2'>Page Count: {this.props.bookData[i].volumeInfo.pageCount}</div>);
+        bookDetails.push(<a key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2' href={this.props.bookData[i].volumeInfo.previewLink}>Preview Link</a>);
         bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-12 col-md-12 col-lg-12 col-xl-12'>DESC: {this.props.bookData[i].volumeInfo.description}</div>);
       }
     }
