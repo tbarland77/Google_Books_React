@@ -41,16 +41,20 @@ class BookList extends Component {
         bookDetails.push(<a key={_.uniqueId()} className='jumbotron col-sm-2 col-md-2 col-lg-2 col-xl-2' href={this.props.bookData[i].volumeInfo.previewLink}>Preview Link</a>);
         bookDetails.push(<div key={_.uniqueId()} className='jumbotron col-sm-12 col-md-12 col-lg-12 col-xl-12'>DESC: {this.props.bookData[i].volumeInfo.description}</div>);
       }
+
+      bookInfo = _.chunk(bookInfo, 5).map(function(group) {
+        return <div className="row" key={_.uniqueId()}>{group}</div>
+      });
     }
+
+
 
     return (
       <div>
       <h2>Returned books:</h2>
       <button className='btn btn-danger' onClick={this.toggleDetailsState}>Toggle Detail Rows</button>
       <div className='container'>
-      <div className='row'>
       {bookInfo}
-      </div>
       <div className='row'>
       {bookDetails}
       </div>
